@@ -34,7 +34,8 @@
 	} else {
 		$value = ($command->commandid == COMMAND_ON ? "TRUE" : "FALSE");
 		$attr = ' -t ' . escapeshellarg($command->attributeid) . ' -v ' . escapeshellarg($value);
-		exec('aprontest -u -m ' . escapeshellarg($command->masterid) . $attr);
+		exec('nohup aprontest -u -m ' . escapeshellarg($command->masterid) . $attr . '> /dev/null 2>&1 &');
+//		exec('aprontest -u -m ' . escapeshellarg($command->masterid) . $attr);
 		$responses[] = ['status' => 'ok', 'exec' => 'aprontest -u -m ' . escapeshellarg($command->masterid) . $attr];
 	}
 	break;
